@@ -1,0 +1,11 @@
+body, html {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	margin: 0;
+}
+body {
+	font: 10px sans-serif;
+}
+#zoom_map {
+	background-color: #95CDFD;
+}
