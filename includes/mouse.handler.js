@@ -4,7 +4,7 @@ townsData = [];
 /* Default parameters */ 
 center = [35, 31.7];
 scale = 9400;
-translate = [0,0];
+//translate = [0,0];
 ZOOM_BY = 1.5;
 zoomTimes = 1;
 
@@ -31,50 +31,16 @@ $(document).ready(function() {
 	parent.addEventListener('DOMMouseScroll', mouseWheel, false);
 }); 
 
-// var box = {
-	// x : -180,
-	// y : -90,
-	// width : 360,
-	// height : 180
-// };
 
-// var render = function() {
-	// for (var i = 0; i < layers.length; i++) {
-		// layers[i].box = box;
-		// layers[i].render();
-	// }
-// };
-// var panBy = function(x, y) {
-	// var degreesPerPixel = box.width / 1024.0;
-	// box.x -= x * degreesPerPixel;
-	// box.y += y * degreesPerPixel;
-	// render();
-// };
-// var zoomBy = function(s, x, y) {
-	// var degreesPerPixel = box.width / 1024.0;
-	// var boxX = box.x + (x * degreesPerPixel);
-	// var boxY = box.y + ((512 - y) * degreesPerPixel);
-	// box.x -= boxX;
-	// box.y -= boxY;
-	// box.x *= s;
-	// box.y *= s;
-	// box.width *= s;
-	// box.height *= s;
-	// box.x += boxX;
-	// box.y += boxY;
-	// render();
-// };
 
 /* Mouse Down */
 var mouseDown = function(e) {
-	//console.log("Down");
 	var prevMouse = {
 		x : e.clientX,
 		y : e.clientY
 	};
 	/* Mouse Move */
 	var mouseMove = function(e) {
-		//console.log("Move");
 		// Calculate distanse between the old coordinate and the new coordinate
 		x = e.clientX-prevMouse.x;
 		y = e.clientY-prevMouse.y;
@@ -84,14 +50,7 @@ var mouseDown = function(e) {
 		prevMouse.y = e.clientY;
 		e.preventDefault();
 		
-		// Change the translate values
-		// var addX=0; 
-		// if (x>0) addX=-0.01; 
-		// else if (x<0) addX=0.01;
-		// var addY=0; 
-		// if (y>0) addY=0.01;
-		// else if (y<0) addY=-0.01;
-		
+		// Change the center values	
 		center[0]+= -x/150;//x;
 		center[1]+= y/150;//(-y);
 		
@@ -101,7 +60,6 @@ var mouseDown = function(e) {
 	};
 	/* Mouse Up */
 	var mouseUp = function(e) {
-		//console.log("Up");
 		document.body.style.cursor = null;
 		document.removeEventListener('mousemove', mouseMove, false);
 		document.removeEventListener('mouseup', mouseUp, false);
@@ -117,16 +75,6 @@ var mouseWheel = function(e) {
 	var localX = e.clientX;
 	var localY = e.clientY;
 
-	// correct for scrolled document
-	//localX += document.body.scrollLeft + document.documentElement.scrollLeft;
-	//localY += document.body.scrollTop + document.documentElement.scrollTop;
-
-	// correct for nested offsets in DOM
-	// for (var node = parent; node; node = node.offsetParent) {
-		// localX -= node.offsetLeft;
-		// localY -= node.offsetTop;
-	// }
-
 	var delta = 0;
 	if (e.wheelDelta) {
 		delta = e.wheelDelta;
@@ -137,32 +85,11 @@ var mouseWheel = function(e) {
 	if (delta > 0) {
 		//zoomBy(0.9, localX, localY);
 		scale*=ZOOM_BY;
-		zoomTimes++;
-		/****Way A **********
-		translate[0]-= 70;
-		translate[1]-= 70;
-		
-		/****Way B **********
-		translate[0]*= 1.5;
-		translate[1]*=1.1;
-		/*******************/
-		
+		zoomTimes++;	
 	} else if (delta < 0) {
-		//zoomBy(1.1, localX, localY);
 		scale/=ZOOM_BY;
-		//if (zoomTimes>1) 
 		zoomTimes--;		
-		//else zoomTimes=1;
-		
-		/**Way A **********
-		translate[0]+= 70;
-		translate[1]+= 70;
-		/**Way B **********
-		translate[0]/= 1.5;
-		translate[1]/=1.1;
-		/*******************/
 	}
-	//console.log(scale);
 
 	// cancel page scroll
 	e.preventDefault();
@@ -174,7 +101,6 @@ var mouseWheel = function(e) {
 
 
 function createMap(){
-	//console.log("start createMap()");
 	$("#zoom_map").css("height", $(document).height()+'px');
 	ORANGE = "#fcaa1c";
 	GRAY = "#434d53";
@@ -190,8 +116,6 @@ function createMap(){
 							.center(center)
 							.rotate([0, 0])
 							.scale(scale);
-							//.translate(translate);
-							//.translate([element.offsetWidth / 2, element.offsetHeight / 2]);
 			var path = d3.geo.path().projection(projection);
 			
 			return {path: path, projection: projection};
@@ -224,15 +148,7 @@ function createMap(){
 		//Find all town tags
 		var townList = $(".bubbles")[0];
 		var town = townList.children[i];
-		
-		//Way-A - put id attribute for every tag (from json)
-		//town.id = townsData[i].id;
-		
-		// //Way-B - take id data from 'dataset.info' in the tag
-		// var townJson_String = town.dataset.info;
-		// var townJson = jQuery.parseJSON( townJson_String );
-		// var town_infoData_id = townJson.id;
-		// 				
+	
 		//Way-C - take the cx, cy (after they generated)
 		var cx = town.cx.baseVal.value;
 		var cy = town.cy.baseVal.value-20;
@@ -267,12 +183,11 @@ function createMap(){
 			.attr("height", townsData[i].sum4)
 			.style("fill", BLUE);
 	}
-	//console.log("finish createMap()");
 }
 
 function createDiagram(){
 	var centerPos = 100;
-	var svgContainer = d3.select('#diagram').append("svg").append("g");//.attr("width", 700).attr("height", 700);
+	var svgContainer = d3.select('#diagram').append("svg").append("g");
 	var diagramCounter = {
 		a : 0,
 		b : 0,
@@ -282,19 +197,12 @@ function createDiagram(){
 	
 	for (i=0; i<townsData.length; i++){
 		$.each(townsData[i], function(key, val) {
-			if (key == diagram.a) diagramCounter.a+= val; /* if (diagramCounter.a>=500) diagramCounter.a*=0.1;} */
-			else if (key == diagram.b) diagramCounter.b+= val; /* if (diagramCounter.b>=500) diagramCounter.b*=0.1;}*/
-			else if (key == diagram.c) diagramCounter.c+= val; /* if (diagramCounter.c>=500) diagramCounter.c*=0.1;}*/
-			else if (key == diagram.d) diagramCounter.d+= val; /* if (diagramCounter.d>=500) diagramCounter.d*=0.1;}*/
-		    //console.log(key);
+			if (key == diagram.a) diagramCounter.a+= val;
+			else if (key == diagram.b) diagramCounter.b+= val; 
+			else if (key == diagram.c) diagramCounter.c+= val; 
+			else if (key == diagram.d) diagramCounter.d+= val; 
 		});
 	}
-	
-	/* normalization */
-	//diagramCounter.a /= 1000000;
-	//diagramCounter.b /= 1000000;
-	//diagramCounter.c /= 1000000;
-	//diagramCounter.d /= 1000000;
 	
 	var circleAttributes = svgContainer.append("rect")	//1- ORANGE
 			.attr("x", centerPos)
@@ -315,7 +223,7 @@ function createDiagram(){
 			.attr("y", centerPos)
 			.attr("width", diagramCounter.c)
 			.attr("height", diagramCounter.c)
-			.style("fill", GREEN);	//townsData[i].color3
+			.style("fill", GREEN);
 
 		var circleAttributes = svgContainer.append("rect")	//4- BLUE
 			.attr("x", centerPos-diagramCounter.d)
@@ -328,12 +236,10 @@ function createDiagram(){
 function readFromDatabase() {
 	$.ajax({
         type: "GET",
-        // url: 'includes/townsData.json',
         url: 'includes/townsData.json',
         async: false,
         success : function(data) {
 			for (i in data) {
-				// debugger;
 				townsData.push(data[i]);
 			}
 			
@@ -350,28 +256,12 @@ function readFromDatabase() {
 				}
 				
 				//3 Divide all other with same number
-				
 				for (j=0; j<counter; j++){
 					townsData[i].sum1/= (10);
 					townsData[i].sum2/= (10);
 					townsData[i].sum3/= (10);
 					townsData[i].sum4/= (10);
 				}
-				
-				// townsData[i].sum1/= (10*counter);
-				// townsData[i].sum2/= (10*counter);
-				// townsData[i].sum3/= (10*counter);
-				// townsData[i].sum4/= (10*counter);
-				
-				//while (townsData[i].sum1>20) townsData[i].sum1/=10;
-				//while (townsData[i].sum2>20) townsData[i].sum2/=10;
-				//while (townsData[i].sum3>20) townsData[i].sum3/=10;
-				//while (townsData[i].sum4>20) townsData[i].sum4/=10;
-				
-				//townsData[i].sum1 /= 10000000;
-				//townsData[i].sum2 /= 10000000;
-				//townsData[i].sum3 /= 10000000;
-				//townsData[i].sum4 /= 10000000;
 			}
 		}
     });
