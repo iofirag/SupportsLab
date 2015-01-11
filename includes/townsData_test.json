@@ -1,0 +1,43 @@
+[
+	{
+		"name": "ראשון לציון",
+		"latitude": 31.9500,
+		"longitude": 34.8000,
+		"radius": 3,
+		"fillKey": "gt50",
+		"sum1": 24,
+		"sum2": 10,
+		"sum3": 15,
+		"sum4": 18
+	}, {
+		"name": "חיפה",
+		"latitude": 32.8167,
+		"longitude": 34.9833,
+		"radius": 3,
+		"fillKey": "gt50",
+		"sum1": 5,
+		"sum2": 15,
+		"sum3": 6,
+		"sum4": 14
+	}, {
+		"name": "ירושלים",
+		"latitude": 31.7833,
+		"longitude": 35.2167,
+		"radius": 3,
+		"fillKey": "gt50",
+		"sum1": 16,
+		"sum2": 10,
+		"sum3": 9,
+		"sum4": 14
+	}, {
+		"name": "באר-שבע",
+		"latitude": 31.2589,
+		"longitude": 34.7997,
+		"radius": 3,
+		"fillKey": "gt50",
+		"sum1": 12,
+		"sum2": 11,
+		"sum3": 10,
+		"sum4": 17
+	}
+]

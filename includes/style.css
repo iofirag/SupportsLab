@@ -9,3 +9,13 @@ body {
 #zoom_map {
 	background-color: #95CDFD;
 }
+
+#diagram {
+	top: 50%;
+	right: 0%;
+	/* width: 300px; */
+	/* height: 300px; */
+	/* z-index: 500; */
+	position: fixed;
+	border: 2px solid black;
+}
