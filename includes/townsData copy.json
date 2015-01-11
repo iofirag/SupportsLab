@@ -1,0 +1,6 @@
+[
+	{id: 'rishon-le-zion', name: 'ראשון לציון', latitude: 31.9500, longitude: 34.8000, radius: 3, fillKey: 'gt50', "sum1":10,"color1":"green", "sum2":14,"color2":"blue", "sum3":18,"color3":"red", "sum4":15,"color4":"purple"},
+	{id: 'haifa', name: 'חיפה', latitude: 32.8167, longitude: 34.9833, radius: 3, fillKey: 'gt50', "sum1":10,"color1":"green", "sum2":14,"color2":"blue", "sum3":18,"color3":"red", "sum4":15,"color4":"purple"},
+	{id: 'jerusalem', name: 'ירושלים', latitude: 31.7833, longitude: 35.2167, radius: 3, fillKey: 'gt50', "sum1":10,"color1":"green", "sum2":14,"color2":"blue", "sum3":18,"color3":"red", "sum4":15,"color4":"purple"},
+	{id: 'beer-sheva', name: 'באר-שבע', latitude: 31.2589, longitude: 34.7997, radius: 3, fillKey: 'gt50', "sum1":10,"color1":"green", "sum2":14,"color2":"blue", "sum3":18,"color3":"red", "sum4":15,"color4":"purple"}
+]
