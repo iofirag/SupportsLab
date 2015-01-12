@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,139 +10,28 @@
 
 		<!-- Import jQuery -->
 		<script src="includes/jquery-1.10.2.min.js"></script>
-
 		<!-- Import D3.js -->
-		<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<!-- Import Leaflet -->
+		<script src="includes/leaflet-0.7.3/leaflet.js"></script>
+		<script src="includes/index2.js"></script>
 	</head>
 	<body>
 		<section id="map"></section>
-
-		<script src="includes/leaflet-0.7.3/leaflet.js"></script>
-		<script>
-			townsData = [];
+		<article id="settings">
+			<section id="layers">מידע לתצוגה:</section>
+			<form name="mapDataSettingsForm">
+				<input type="radio" name="mapData" value="1" checked>ערים
+				<br>
+				<input type="radio" name="mapData" value="2">מועצה אזורית
+				<br>
+				<input type="radio" name="mapData" value="3">מועצה מקומית
+			</form>
 			
-			// Create Map and adjust size
-			$("#map").css("height", $(document).height() + 'px');
-			var map = L.map('map').setView([32, 36], 8);
-
-			// Add Layers
-			addLayers();
-
-			// Show my Marker on map
-			showMe();
+			<section id="diagramTitle" class="settings">סה"כ עבור כל השנה:</section>
+			<section id="diagram"></section>
 			
-			
-			/* load database */
-			readFromDatabase();
-			
-			/* Put All Cities */
-			for (j in townsData){
-				console.log(townsData[j].latitude+" "+townsData[j].longitude+" "+townsData[j].sum1+" "+townsData[j].sum2+" "+townsData[j].sum3+" "+townsData[j].sum4);
-				city(townsData[j].latitude, townsData[j].longitude, [townsData[j].sum1, townsData[j].sum2, townsData[j].sum3, townsData[j].sum4]);
-			}
-			//city(32.184781,34.871326, [30,40,20,60]);
-			
-			// Rectangles
-			function rectangles (lat,lon,dist,type){
-				ORANGE = "#fcaa1c";
-				GRAY = "#434d53";
-				GREEN = "#7bb37f";
-				BLUE = "#23959c";
-				switch (type){
-				case 0:
-					// A - define rectangle geographical bounds
-					var bounds = [[lat, lon], [lat+(dist), lon+(dist)]];
-					// create an orange rectangle
-					L.rectangle(bounds, {color: ORANGE, weight: 7}).addTo(map);
-					break;
-				case 1:
-					// B - define rectangle geographical bounds
-					var bounds = [[lat, lon], [lat-(dist), lon+(dist)]];
-					// create an orange rectangle
-					L.rectangle(bounds, {color: GRAY, weight: 7}).addTo(map);
-					break;
-				case 2:
-					// C - define rectangle geographical bounds
-					var bounds = [[lat, lon], [lat-(dist), lon-(dist)]];
-					// create an orange rectangle
-					L.rectangle(bounds, {color: GREEN, weight: 7}).addTo(map);
-					break;
-				case 3:
-					// D - define rectangle geographical bounds
-					var bounds = [[lat, lon], [lat+(dist), lon-(dist)]];
-					// create an orange rectangle
-					L.rectangle(bounds, {color: BLUE, weight: 7}).addTo(map);
-					break;
-				}
-				
-			}
-			function city(lat,lon,dist){
-				for (i=0; i<4; i++){
-					rectangles(lat,lon,	dist[i], i);
-				}
-			}			
-			
-			/* Add layeres to map */
-			function addLayers() {
-				L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-					maxZoom : 18,
-					//attribution : 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-					id : 'examples.map-i875mjb7'
-				}).addTo(map);
-			}
-			
-			/* Get location & show it */
-			function showMe() {
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(showPosition);
-				} else {
-					x.innerHTML = "Geolocation is not supported by this browser.";
-				}
-			}
-			function showPosition(position) {
-				L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-			}
-			function readFromDatabase(){
-				$.ajax({
-			        type: "GET",
-			        url: 'includes/townsData.json',
-			        async: false,
-			        success : function(data) {
-						for (var i in data) {
-							townsData.push(data[i]);
-						}
-						
-						/* normalization */
-						var max =0;
-						for (var i=0; i<townsData.length; i++){
-							//1 Find the hight val
-							max= Math.max(townsData[i].sum1,townsData[i].sum2,townsData[i].sum3,townsData[i].sum4,max);	//max=4236710884
-							//var counter=0;
-							
-							townsData[i].sum1/= (5000000000);
-							townsData[i].sum2/= (5000000000);
-							townsData[i].sum3/= (5000000000);
-							townsData[i].sum4/= (5000000000);
-							
-							//2 Divide it with 10 untill it less then 20 (save how many times divided)
-							// while (max>20){ 
-								// max/=10;
-								// counter++;
-							// }
-							
-							//3 Divide all other with same number
-							/*for (j=0; j<counter; j++){
-								townsData[i].sum1/= (10);
-								townsData[i].sum2/= (10);
-								townsData[i].sum3/= (10);
-								townsData[i].sum4/= (10);
-							}*/
-						}
-						console.log("max="+max);
-					}
-			    });
-			}
-		</script>
-
+		</article>
+		<div class="clear"></div>
 	</body>
 </html>

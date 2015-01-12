@@ -11,7 +11,22 @@ body {
 }
 
 #map { 
-	
+	position: relative;
+	width: 80%;
+	float: left;
+}
+
+#settings{
+	float:right;
+}
+
+#diagramTitle {
+	top: 50%;
+	right: 0%;
+	/* width: 300px; */
+	/* height: 300px; */
+	/* z-index: 500; */
+	position: relative;
 }
 
 #diagram {
@@ -20,6 +35,9 @@ body {
 	/* width: 300px; */
 	/* height: 300px; */
 	/* z-index: 500; */
-	position: fixed;
-	border: 2px solid black;
+	//position: relative;
+}
+
+.clear {
+    clear: both;
 }
