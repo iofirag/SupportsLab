@@ -244,25 +244,32 @@ function readFromDatabase() {
 			}
 			
 			/* normalization */
+			var max =0;
 			for (i=0; i<townsData.length; i++){
 				//1 Find the hight val
-				var max = Math.max(townsData[i].sum1,townsData[i].sum2,townsData[i].sum3,townsData[i].sum4);
+				max= Math.max(townsData[i].sum1,townsData[i].sum2,townsData[i].sum3,townsData[i].sum4,max);	//max=4236710884
 				var counter=0;
 				
+				townsData[i].sum1/= (60000000);
+				townsData[i].sum2/= (60000000);
+				townsData[i].sum3/= (60000000);
+				townsData[i].sum4/= (60000000);
+				
 				//2 Divide it with 10 untill it less then 20 (save how many times divided)
-				while (max>20){ 
-					max/=10;
-					counter++;
-				}
+				// while (max>20){ 
+					// max/=10;
+					// counter++;
+				// }
 				
 				//3 Divide all other with same number
-				for (j=0; j<counter; j++){
+				/*for (j=0; j<counter; j++){
 					townsData[i].sum1/= (10);
 					townsData[i].sum2/= (10);
 					townsData[i].sum3/= (10);
 					townsData[i].sum4/= (10);
-				}
+				}*/
 			}
+			console.log("max="+max);
 		}
     });
 }
