@@ -11,6 +11,13 @@ diagram = {
 		c : 'sum3',
 		d : 'sum4'
 };
+
+/* Colors */
+ORANGE = "#fcaa1c";
+GRAY = "#434d53";
+GREEN = "#7bb37f";
+BLUE = "#23959c";
+
 $(document).ready(function() {
 	// Create the minimal map
 	createMap();
@@ -31,7 +38,7 @@ $(document).ready(function() {
 function createMap(){
 	// Create Map and adjust size
 	$("#map").css("height", $(document).height() + 'px');
-	$("#map").css("width", "80%");
+	//$("#map").css("width", "80%");
 	map = L.map('map').setView([32, 36], 8);
 	
 	// Add Layers
@@ -114,10 +121,6 @@ function putCities(){
 		}
 	}
 	function rectangles (lat,lon,dist,type){
-		ORANGE = "#fcaa1c";
-		GRAY = "#434d53";
-		GREEN = "#7bb37f";
-		BLUE = "#23959c";
 		switch (type){
 		case 0:
 			// A - define rectangle geographical bounds
@@ -148,7 +151,7 @@ function putCities(){
 }
 
 function createDiagram(){
-	var centerPos = 0;
+	var centerPos = 100;
 	var diagramContainer = d3.select('#diagram').append("svg").append("g");
 	var diagramCounter = {
 		a : 0,
@@ -162,7 +165,7 @@ function createDiagram(){
 			if (key == diagram.a) diagramCounter.a+= val;
 			else if (key == diagram.b) diagramCounter.b+= val; 
 			else if (key == diagram.c) diagramCounter.c+= val; 
-			else if (key == diagram.d) diagramCounter.d+= val; 
+			else if (key == diagram.d) diagramCounter.d+= val;
 		});
 	}
 	
