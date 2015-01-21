@@ -7,6 +7,10 @@ body, html {
 body {
 	font: 10px sans-serif;
 }
+#wrapper {
+	display: block;
+	margin: auto;
+}
 #zoom_map {
 	background-color: #95CDFD;
 }
@@ -16,14 +20,12 @@ body {
 	width: 80%;
 	float: left;
 }
-
 .settings{
 	float:right;
 }
 #settings{
 
 }
-
 #diagramTitle {
 	top: 50%;
 	right: 0%;

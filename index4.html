@@ -20,30 +20,51 @@
 		<!-- css -->
 		<link rel="stylesheet" type="text/css" href="includes/style.css" />
 	</head>
-	<body >
-		<section id='map'></section>
+	<body>
 		
-		<article id="settings" data-role="content">
-			<form name="mapDataSettingsForm" method="post" action="demoform.asp">
-				<label for="year">שנה:
-					<input class="slider" type="range" name="year" id="year" value="2014" min="2008" max="2014"></label>
-
-				<br><br><br><br>
-
-				<label for="placesToShow">מידע לתצוגה:</label>
-				<label for="mapData">ערים
-					<input type="radio" name="mapData" value="0" checked></label>
-				<label for="mapData">מועצות אזוריות
-					<input type="radio" name="mapData" value="1" ></label>
-				<label for="mapData">מועצות מקומיות
-					<input type="radio" name="mapData" value="2" ></label>
-			</form>
+		<div id="wrapper">
 			
-			<br><br>
+			<!-- Start Page -->
+			<!-- <article data-role="page"  id="page_">
+				<article data-role="content">
+					
+				</article>
+			</article> -->
 			
-			<!-- <section id="diagramTitle">סה"כ עבור כל השנה:</section> -->
-			<section id="diagram"></section>
-		</article>
-		<div class="clear"></div>
+			
+			<!-- Map Page -->
+			<article data-role="page"  id="page_map">
+				<article data-role="content">
+					<section id='map'></section>
+		
+					<section id="settings" data-role="content">
+						<form name="mapDataSettingsForm" method="post" action="demoform.asp">
+							<label for="year">שנה:
+								<input class="slider" type="range" name="year" id="year" value="2014" min="2008" max="2014"></label>
+	 
+								<br><br><br><br>
+			
+							<label for="placesToShow">מידע לתצוגה:</label>
+							<label for="mapData">ערים
+								<input type="radio" name="mapData" value="0" checked></label>
+							<label for="mapData">מועצות אזוריות
+								<input type="radio" name="mapData" value="1" ></label>
+							<label for="mapData">מועצות מקומיות
+								<input type="radio" name="mapData" value="2" ></label>
+								
+							<br><br><br><br>
+							
+							<label for="diagramTitle">סה"כ עבור כל השנה:</label>
+							<section id="diagram"></section>
+						</form>
+					</article>
+					<div class="clear"></div>
+				</article>
+			</article>
+		
+		</div>
+		
+		
+		
 	</body>
 </html>
