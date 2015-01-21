@@ -42,7 +42,7 @@ function createMap(){
 	map = L.map('map').setView([32, 36], 8);
 	
 	// Add Layers
-	addLayers();
+	addLayers2();
 
 	// Show my Marker on map
 	showMe();
@@ -53,6 +53,21 @@ function createMap(){
 			maxZoom : 18,
 			//attribution : 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id : 'examples.map-i875mjb7'
+		}).addTo(map);
+	}
+	function addLayers2() {
+
+		L.mapbox.accessToken = '<your access token here>';
+		// Replace 'examples.map-i87786ca' with your map id.
+		var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			attribution : '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
+			id : 'erez.kpm09np5'
+		}).addTo(map); 
+
+		L.tileLayer('a.tiles.mapbox.com/v4//{id}/{z}/{x}/{y}.png', { //pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#7
+			//maxZoom : 18,
+			//attribution : 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id : 'erez.kpm09np5'
 		}).addTo(map);
 	}
 	/* Get location & show it */
