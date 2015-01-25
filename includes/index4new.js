@@ -3,7 +3,10 @@ cityData = [];
 
 /* Map */
 var map;
-var assetLayerGroup;
+var assetLayerGroup_0;
+var assetLayerGroup_1;
+var assetLayerGroup_2;
+
 /* Diagram - Title user checked */
 diagram = {
 	ru : 'Education',
@@ -29,8 +32,7 @@ places_ToShow = 0;
 	ZOOM_MAX = 5;
 	ZOOM_MIN = 0;
 
-	STEP_LAT = 0.04;
-	STEP_LON = 0.05;
+
 
 $(document).ready(function() {
 	// Create the minimal map
@@ -38,7 +40,7 @@ $(document).ready(function() {
 	
 	/* load database */
 	readFromDatabase();
-
+	
 	/* Put All Cities */
 	putCities();
 	
@@ -66,8 +68,8 @@ function createMap(){
 	
 	/******************** Add Map ****************************************************************/
 	// Us
-	//L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#4';
-	//map = L.mapbox.map('map', 'erez.kpm09np5').setView([31.5, 36], 8);
+	/* L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#4';
+	map = L.mapbox.map('map', 'erez.kpm09np5').setView([31.5, 36], 8); */
 	
 	// General - (hebrew+arabic)
 	/*L.mapbox.accessToken = 'pk.eyJ1IjoiaW9maXJhZyIsImEiOiJ6bFRjUlJ3In0.wnfOTbaAq0r1bsia3puGRg';
@@ -77,8 +79,8 @@ function createMap(){
 	    center: new L.LatLng(31.5, 36),
 	    zoom: 8,
 	    layers: [
-	        //L.tileLayer('http://{s}.www.toolserver.org/tiles/osm-no-labels/{z}/{x}/{y}.png')
-	        L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
+	        L.tileLayer('http://{s}.www.toolserver.org/tiles/osm-no-labels/{z}/{x}/{y}.png')
+	        // L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
 	    ]
 	});
 	
@@ -87,8 +89,11 @@ function createMap(){
 	    console.log("zoomend"+" "+map.getZoom());
 	});
 	
-	// initiate data layer-group
-	assetLayerGroup = new L.LayerGroup();			
+	
+	assetLayerGroup_0 = new L.LayerGroup();	
+	assetLayerGroup_1 = new L.LayerGroup();	
+	assetLayerGroup_2 = new L.LayerGroup();			
+	
 	
 	// Show my Marker on map
 	showMe();
@@ -117,18 +122,24 @@ function readFromDatabase(){
 				
 				/* normalization */
 				var max =0;
-				for (var k=0; k<data[i].sums.length; k++){
-					//1 Find the height val
-					//max= Math.max(data[i].sums[k], data[i].sum2,cityData[i].sum3,cityData[i].sum4,max);	//max=4236710884
-					
-					// data[i].sum1/= (3000000000);
-					// data[i].sum2/= (3000000000);
-					// data[i].sum3/= (3000000000);
-					// data[i].sum4/= (3000000000);
+				debugger;
+				switch (data[i].type){
+				case 0:	// Big
+					break;
+				case 1:	// Normal
+					break;
+				case 2:	// Small
+					break;
 				}
-				
-
-				
+				//for (var j=0; j<cityData[i].sums.length; j++){
+					//1 Find the height val
+					//max= Math.max(cityData[i].sums[j],cityData[i].sum2,cityData[i].sum3,cityData[i].sum4,max);	//max=4236710884
+					
+					//cityData[i].sums/= (3000000000);
+					//cityData[i].sum2/= (3000000000);
+					//cityData[i].sum3/= (3000000000);
+					//cityData[i].sum4/= (3000000000);
+				//}
 				
 				// Build cityData Obj
 				cityData.push(data[i]);
@@ -140,12 +151,12 @@ function readFromDatabase(){
 }
 
 function putCities(){
-	assetLayerGroup.clearLayers();
+	//assetLayerGroup_0.clearLayers();
+	
 	for (i in cityData){
 		// find places that theyer size - like user checked
 		if (cityData[i].type == places_ToShow){
-			
-			/// -- A ----
+			//debugger;
 			// Put cities data in 4 rectangles
 			// find the data about the year - like user checked
 			for(k in cityData[i].sums){
@@ -155,7 +166,6 @@ function putCities(){
 					var city_toShow = {
 						latitude: 0,
 						longitude: 0,
-						type: 0,
 						ru: 0,
 						rd: 0,
 						ld: 0,
@@ -165,14 +175,13 @@ function putCities(){
 					city_toShow.latitude = cityData[i].latitude;
 					city_toShow.longitude = cityData[i].longitude;
 					
-					city_toShow.type = cityData[i].type;
-					
 					// find the 4 things to show - like user checked
 					$.each(cityData[i].sums[k], function(key, val) {
 						//show city rectangles data by lat-lng and value
 							// cityData[i].latitude
 							// cityData[i].longitude
 							// val
+						//debugger;
 						switch (key){
 						case diagram.ru: city_toShow.ru = val;
 							break;
@@ -184,28 +193,20 @@ function putCities(){
 							break;
 						}
 					});
-					//city(city_toShow);
-					//break;
+					city(city_toShow);
+					break;
 				}
 				//console.log(cityData[j].latitude+" "+cityData[j].longitude+" "+cityData[j].sum1+" "+cityData[j].sum2+" "+cityData[j].sum3+" "+cityData[j].sum4);
 				//city(cityData[j].latitude, cityData[j].longitude, [cityData[j].sum1, cityData[j].sum2, cityData[j].sum3, cityData[j].sum4]);
 			}
 			
-			/// -- B ----
-			//Put cities (bubbles)
-			var circle = L.circle([cityData[i].latitude, cityData[i].longitude], 700, {
-			    color: 'green',
+			//Put cities
+			var circle = L.circle([cityData[i].latitude, cityData[i].longitude], 2000, {
+			    color: 'red',
 			    fillColor: '#f03',
 			    fillOpacity: 0.5
 			});
 			circle.bindPopup(cityData[i].name);
-			circle.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			circle.on('mouseout', function(e) {
-				this.closePopup();
-			}); 
-			
 			
 			// Create an Layer-Group (use for fast remove all of them)
 			assetLayerGroup.addLayer(circle);
@@ -213,88 +214,37 @@ function putCities(){
 		assetLayerGroup.addTo(map);
 	}
 	
-	// For test
-	rectangles(32.0852999, 34.78176759999999,	city_toShow.ru, 'ru', 0);
-	rectangles(32.0852999, 34.78176759999999,	city_toShow.rd, 'rd', 0);
-	rectangles(32.0852999, 34.78176759999999,	city_toShow.ld, 'ld', 0);
-	rectangles(32.0852999, 34.78176759999999,	city_toShow.lu, 'lu', 0);
-	
-	rectangles(32.068424, 34.824785,	city_toShow.ru, 'ru', 0);
-	rectangles(32.068424, 34.824785,	city_toShow.rd, 'rd', 0);
-	rectangles(32.068424, 34.824785,	city_toShow.ld, 'ld', 0);
-	rectangles(32.068424, 34.824785,	city_toShow.lu, 'lu', 0);
-	
-
-	
 	function city(city_toShow){
-		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ru, 'ru', city_toShow.type);
-		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.rd, 'rd', city_toShow.type);
-		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ld, 'ld', city_toShow.type);
-		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.lu, 'lu', city_toShow.type);
+		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ru, 'ru');
+		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.rd, 'rd');
+		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ld, 'ld');
+		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.lu, 'lu');
 	}
-	function rectangles(lat,lon,dist,recNum, type){
-		/*switch (city_toShow.type){
-		case 0:	dist/=500000000;
-			break;
-		case 1: dist/=50000000;
-			break;
-		case 2: dist/=10000000;
-			break;
-		}*/
-		
+	function rectangles(lat,lon,dist,recNum){
 		switch (recNum){
 		case 'ru':	//ru
 			// A - define rectangle geographical bounds
-			//var bounds = [[lat, lon], [lat+(dist), lon+(dist)]];
-			var bounds = [[lat, lon], [lat+STEP_LAT, lon+STEP_LON]];
+			var bounds = [[lat, lon], [lat+(dist), lon+(dist)]];
 			// create an orange rectangle
-			var rec = L.rectangle(bounds, {color: ORANGE, weight: 7, fillOpacity: 1}).addTo(map);
-			rec.bindPopup("city name");
-			rec.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			rec.on('mouseout', function(e) {
-				this.closePopup();
-			}); 
+			L.rectangle(bounds, {color: ORANGE, weight: 7}).addTo(map);
 			break;
 		case 'rd':	//rd
 			// B - define rectangle geographical bounds
-			var bounds = [[lat, lon], [lat-STEP_LAT, lon+STEP_LON]];
+			var bounds = [[lat, lon], [lat-(dist), lon+(dist)]];
 			// create an orange rectangle
-			var rec = L.rectangle(bounds, {color: GRAY, weight: 7, fillOpacity: 1}).addTo(map);
-			rec.bindPopup("city name");
-			rec.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			rec.on('mouseout', function(e) {
-				this.closePopup();
-			});
+			L.rectangle(bounds, {color: GRAY, weight: 7}).addTo(map);
 			break;
 		case 'ld':	//ld
 			// C - define rectangle geographical bounds
-			var bounds = [[lat, lon], [lat-STEP_LAT, lon-STEP_LON]];
+			var bounds = [[lat, lon], [lat-(dist), lon-(dist)]];
 			// create an orange rectangle
-			var rec = L.rectangle(bounds, {color: GREEN, weight: 7, fillOpacity: 1}).addTo(map);
-			rec.bindPopup("city name");
-			rec.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			rec.on('mouseout', function(e) {
-				this.closePopup();
-			}); 
+			L.rectangle(bounds, {color: GREEN, weight: 7}).addTo(map);
 			break;
 		case 'lu':	//lu
 			// D - define rectangle geographical bounds
-			var bounds = [[lat, lon], [lat+STEP_LAT, lon-STEP_LON]];
+			var bounds = [[lat, lon], [lat+(dist), lon-(dist)]];
 			// create an orange rectangle
-			var rec = L.rectangle(bounds, {color: BLUE, weight: 7, fillOpacity: 1}).addTo(map);
-			rec.bindPopup("city name");
-			rec.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			rec.on('mouseout', function(e) {
-				this.closePopup();
-			}); 
+			L.rectangle(bounds, {color: BLUE, weight: 7}).addTo(map);
 			break;
 		}
 	}
