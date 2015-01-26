@@ -137,3 +137,29 @@ $(document).ready(function() {
 					// divide all the city data by Z
 					break;
 				}
+				
+				
+				
+			circle.on('mouseover', function(e) {
+				this.openPopup();
+			});
+			circle.on('mouseout', function(e) {
+				this.closePopup();
+			}); 
+			
+
+
+			customCircleMarker = L.CircleMarker.extend({
+			   options: { 
+			      someCustomProperty: 'Custom data!',
+			      anotherCustomProperty: 'More data!'
+			   }
+			});
+			
+			var myMarker = new customCircleMarker([31.505, 34.09], { 
+			    title: 'Marker',
+			    radius: 20,
+			    someCustomProperty: 'Adding custom data to this marker!',
+			    anotherCustomProperty: 'More custom data to this marker!'
+			});
+			myMarker.addTo(map);

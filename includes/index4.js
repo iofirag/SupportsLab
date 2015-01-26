@@ -66,21 +66,21 @@ function createMap(){
 	
 	/******************** Add Map ****************************************************************/
 	// Us
-	//L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#4';
-	//map = L.mapbox.map('map', 'erez.kpm09np5').setView([31.5, 36], 8);
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#8';
+	map = L.mapbox.map('map', 'erez.l1l22p98').setView([31.5, 36], 8);
 	
 	// General - (hebrew+arabic)
 	/*L.mapbox.accessToken = 'pk.eyJ1IjoiaW9maXJhZyIsImEiOiJ6bFRjUlJ3In0.wnfOTbaAq0r1bsia3puGRg';
 	map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([31.5, 36], 8); */
 	
-	map = new L.Map('map', {
+	/*map = new L.Map('map', {
 	    center: new L.LatLng(31.5, 36),
 	    zoom: 8,
 	    layers: [
 	        //L.tileLayer('http://{s}.www.toolserver.org/tiles/osm-no-labels/{z}/{x}/{y}.png')
 	        L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
 	    ]
-	});
+	});*/
 	
 	/********** Control on Map-Zoom Events *************/
 	map.on('zoomend', function(e) {
@@ -109,7 +109,6 @@ function createMap(){
 function readFromDatabase(){
 	$.ajax({
         type: "GET",
-        //url: 'includes/cityData.json',
         url: 'includes/ofirData.json',
         async: false,
         success : function(data) {
@@ -128,8 +127,6 @@ function readFromDatabase(){
 				}
 				
 
-				
-				
 				// Build cityData Obj
 				cityData.push(data[i]);
 				
@@ -139,80 +136,7 @@ function readFromDatabase(){
     });
 }
 
-function putCities(){
-	assetLayerGroup.clearLayers();
-	for (i in cityData){
-		// find places that theyer size - like user checked
-		if (cityData[i].type == places_ToShow){
-			
-			/// -- A ----
-			// Put cities data in 4 rectangles
-			// find the data about the year - like user checked
-			for(k in cityData[i].sums){
-				//debugger;
-				if (cityData[i].sums[k].year == year_ToShow){
-					
-					var city_toShow = {
-						latitude: 0,
-						longitude: 0,
-						type: 0,
-						ru: 0,
-						rd: 0,
-						ld: 0,
-						lu: 0
-					};
-					
-					city_toShow.latitude = cityData[i].latitude;
-					city_toShow.longitude = cityData[i].longitude;
-					
-					city_toShow.type = cityData[i].type;
-					
-					// find the 4 things to show - like user checked
-					$.each(cityData[i].sums[k], function(key, val) {
-						//show city rectangles data by lat-lng and value
-							// cityData[i].latitude
-							// cityData[i].longitude
-							// val
-						switch (key){
-						case diagram.ru: city_toShow.ru = val;
-							break;
-						case diagram.rd: city_toShow.rd = val;
-							break;
-						case diagram.ld: city_toShow.ld = val;
-							break;
-						case diagram.lu: city_toShow.lu = val;
-							break;
-						}
-					});
-					//city(city_toShow);
-					//break;
-				}
-				//console.log(cityData[j].latitude+" "+cityData[j].longitude+" "+cityData[j].sum1+" "+cityData[j].sum2+" "+cityData[j].sum3+" "+cityData[j].sum4);
-				//city(cityData[j].latitude, cityData[j].longitude, [cityData[j].sum1, cityData[j].sum2, cityData[j].sum3, cityData[j].sum4]);
-			}
-			
-			/// -- B ----
-			//Put cities (bubbles)
-			var circle = L.circle([cityData[i].latitude, cityData[i].longitude], 700, {
-			    color: 'green',
-			    fillColor: '#f03',
-			    fillOpacity: 0.5
-			});
-			circle.bindPopup(cityData[i].name);
-			circle.on('mouseover', function(e) {
-				this.openPopup();
-			});
-			circle.on('mouseout', function(e) {
-				this.closePopup();
-			}); 
-			
-			
-			// Create an Layer-Group (use for fast remove all of them)
-			assetLayerGroup.addLayer(circle);
-		}
-		assetLayerGroup.addTo(map);
-	}
-	
+function putRecData(e){
 	// For test
 	rectangles(32.0852999, 34.78176759999999,	city_toShow.ru, 'ru', 0);
 	rectangles(32.0852999, 34.78176759999999,	city_toShow.rd, 'rd', 0);
@@ -224,7 +148,88 @@ function putCities(){
 	rectangles(32.068424, 34.824785,	city_toShow.ld, 'ld', 0);
 	rectangles(32.068424, 34.824785,	city_toShow.lu, 'lu', 0);
 	
+	for (i in cityData){
+		if (cityData[i].latitude == e.target._latlng.lat && cityData[i].longitude == e.target._latlng.lng){
+			console.log(cityData[i].name);
+			
+			// find places that theyer size - like user checked
+			//if (cityData[i].type == places_ToShow){
+				/*/// -- A ----
+				// Put cities data in 4 rectangles
+				// find the data about the year - like user checked
+				for(k in cityData[i].sums){
+					//debugger;
+					if (cityData[i].sums[k].year == year_ToShow){
+						
+						var city_toShow = {
+							latitude: 0,
+							longitude: 0,
+							type: 0,
+							ru: 0,
+							rd: 0,
+							ld: 0,
+							lu: 0
+						};
+						
+						city_toShow.latitude = cityData[i].latitude;
+						city_toShow.longitude = cityData[i].longitude;
+						
+						city_toShow.type = cityData[i].type;
+						
+						// find the 4 things to show - like user checked
+						$.each(cityData[i].sums[k], function(key, val) {
+							//show city rectangles data by lat-lng and value
+								// cityData[i].latitude
+								// cityData[i].longitude
+								// val
+							switch (key){
+							case diagram.ru: city_toShow.ru = val;
+								break;
+							case diagram.rd: city_toShow.rd = val;
+								break;
+							case diagram.ld: city_toShow.ld = val;
+								break;
+							case diagram.lu: city_toShow.lu = val;
+								break;
+							}
+						});
+						//city(city_toShow);
+						//break;
+					}
+					//console.log(cityData[j].latitude+" "+cityData[j].longitude+" "+cityData[j].sum1+" "+cityData[j].sum2+" "+cityData[j].sum3+" "+cityData[j].sum4);
+					//city(cityData[j].latitude, cityData[j].longitude, [cityData[j].sum1, cityData[j].sum2, cityData[j].sum3, cityData[j].sum4]);
+				}*/	
+			//}
+		}
+	}
+	//console.log(e);
+}
 
+function putCities(){
+	assetLayerGroup.clearLayers();
+	for (i in cityData){
+		// find places that theyer size - like user checked
+		if (cityData[i].type == places_ToShow){
+			
+			/// -- B ----
+			//Put cities (bubbles)
+			var circle = L.circle([cityData[i].latitude, cityData[i].longitude], 700,  {
+			    color: 'green',
+			    fillColor: '#f03',
+			    fillOpacity: 0.5
+			    //className: cityData[i].fillkey
+			});
+			circle.on('click', function(e){
+				putRecData(e);
+			});
+			
+			
+			
+			// Create an Layer-Group (use for fast remove all of them)
+			assetLayerGroup.addLayer(circle);
+		}
+		assetLayerGroup.addTo(map);
+	}
 	
 	function city(city_toShow){
 		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ru, 'ru', city_toShow.type);
