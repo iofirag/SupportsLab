@@ -3,14 +3,18 @@ cityData = [];
 
 /* Map */
 var map;
-var assetLayerGroup;
+var assetLayerGroup_big;
+var assetLayerGroup_middle;
+var assetLayerGroup_small;
+
 /* Diagram - Title user checked */
-diagram = {
+var diagram = {
 	ru : 'Education',
 	rd : 'Transport',
 	ld : 'Pnim',
 	lu : 'Bitahon'
 };
+var diagramMax = 220; 
 
 /* Year checked by user */
 year_ToShow = 2014;
@@ -32,24 +36,27 @@ places_ToShow = 0;
 	STEP_LAT = 0.04;
 	STEP_LON = 0.05;
 
-$(document).ready(function() {
-	// Create the minimal map
-	createMap();
-	
-	/* load database */
-	readFromDatabase();
+//********************************************************************************************
 
-	/* Put All Cities */
-	putCities();
+$(document).ready(function() {
+	/* Create map */
+	createMap();
+
+	/* load database & build 3 data layers */
+	readFromDatabase();
 	
 	/* Create diagram */
 	createDiagram();
 	
-	/* Range Slider Handler */
-	rangeSlider_Handler();
-	
-	/* Radio Buttons Handler */
-	radioButtons_Handler();
+	/* Handler */
+		// Range Slider Handler
+		rangeSlider_Handler();
+		
+		// Radio Buttons Handler
+		radioButtons_Handler();
+		
+	/* Show places */
+	putCities();
 });
 			
 function createMap(){
@@ -69,26 +76,11 @@ function createMap(){
 	L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#8';
 	map = L.mapbox.map('map', 'erez.l1l22p98').setView([31.5, 36], 8);
 	
-	// General - (hebrew+arabic)
-	/*L.mapbox.accessToken = 'pk.eyJ1IjoiaW9maXJhZyIsImEiOiJ6bFRjUlJ3In0.wnfOTbaAq0r1bsia3puGRg';
-	map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([31.5, 36], 8); */
-	
-	/*map = new L.Map('map', {
-	    center: new L.LatLng(31.5, 36),
-	    zoom: 8,
-	    layers: [
-	        //L.tileLayer('http://{s}.www.toolserver.org/tiles/osm-no-labels/{z}/{x}/{y}.png')
-	        L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
-	    ]
-	});*/
-	
-	/********** Control on Map-Zoom Events *************/
-	map.on('zoomend', function(e) {
-	    console.log("zoomend"+" "+map.getZoom());
-	});
 	
 	// initiate data layer-group
-	assetLayerGroup = new L.LayerGroup();			
+	assetLayerGroup_big = new L.LayerGroup();
+	assetLayerGroup_middle = new L.LayerGroup();	
+	assetLayerGroup_small = new L.LayerGroup();			
 	
 	// Show my Marker on map
 	showMe();
@@ -113,31 +105,61 @@ function readFromDatabase(){
         async: false,
         success : function(data) {
 			for (var i in data) {
-				
-				/* normalization */
-				var max =0;
-				for (var k=0; k<data[i].sums.length; k++){
-					//1 Find the height val
-					//max= Math.max(data[i].sums[k], data[i].sum2,cityData[i].sum3,cityData[i].sum4,max);	//max=4236710884
-					
-					// data[i].sum1/= (3000000000);
-					// data[i].sum2/= (3000000000);
-					// data[i].sum3/= (3000000000);
-					// data[i].sum4/= (3000000000);
-				}
-				
-
 				// Build cityData Obj
 				cityData.push(data[i]);
-				
-				console.log("max="+max);
+
+				// build layers
+				createCityLayers(cityData[i]);
 			}
 		}
     });
+    
+    /* Create an Layer-Group (use for fast remove all of them) */
+	function createCityLayers(city) {
+		var circle = L.circle([city.latitude, city.longitude], 700,  {
+				    color: 'green',
+				    fillColor: '#f03',
+				    fillOpacity: 0.5
+				    //className: cityData[i].fillkey
+				});
+				// City onClick Event
+				circle.on('click', function(e){
+					putRecData(e);
+				});
+				// City popup name onHover Event
+				circle.bindPopup(city.name);
+				circle.on('mouseover', function(e) {
+					this.openPopup();
+				});
+				circle.on('mouseout', function(e) {
+					this.closePopup();
+				}); 
+		
+		// Create an Layer-Group (use for fast remove all of them)
+		switch(city.type){
+		case 0: 
+			assetLayerGroup_big.addLayer(circle);
+			break;
+		case 1:
+			assetLayerGroup_middle.addLayer(circle);
+			break;
+		case 2:
+			assetLayerGroup_small.addLayer(circle);
+			break;
+		}
+	}
 }
 
+
+
 function putRecData(e){
-	// For test
+	/* normalization */
+	var max =0;
+	for (var k=0; k<data[i].sums.length; k++){
+		//1 Find the height val
+		max= Math.max(data[i].sums[k], data[i].sum2,cityData[i].sum3,cityData[i].sum4,max);
+	}
+	// static data for test
 	rectangles(32.0852999, 34.78176759999999,	city_toShow.ru, 'ru', 0);
 	rectangles(32.0852999, 34.78176759999999,	city_toShow.rd, 'rd', 0);
 	rectangles(32.0852999, 34.78176759999999,	city_toShow.ld, 'ld', 0);
@@ -203,33 +225,6 @@ function putRecData(e){
 		}
 	}
 	//console.log(e);
-}
-
-function putCities(){
-	assetLayerGroup.clearLayers();
-	for (i in cityData){
-		// find places that theyer size - like user checked
-		if (cityData[i].type == places_ToShow){
-			
-			/// -- B ----
-			//Put cities (bubbles)
-			var circle = L.circle([cityData[i].latitude, cityData[i].longitude], 700,  {
-			    color: 'green',
-			    fillColor: '#f03',
-			    fillOpacity: 0.5
-			    //className: cityData[i].fillkey
-			});
-			circle.on('click', function(e){
-				putRecData(e);
-			});
-			
-			
-			
-			// Create an Layer-Group (use for fast remove all of them)
-			assetLayerGroup.addLayer(circle);
-		}
-		assetLayerGroup.addTo(map);
-	}
 	
 	function city(city_toShow){
 		rectangles(city_toShow.latitude, city_toShow.longitude,	city_toShow.ru, 'ru', city_toShow.type);
@@ -305,51 +300,95 @@ function putCities(){
 	}
 }
 
+
+
+
 function createDiagram(){
-	var centerPos = 100;
-	var diagramContainer = d3.select('#diagram').append("svg").append("g");
+	// clear last diagram
+	$('#diagram').empty();
+	
+	// draw new diagram
+	var centerPos = diagramMax/2;
+	var diagramContainer = d3.select('#diagram').append("svg").attr("width", diagramMax).attr("height", diagramMax);
 	var diagramCounter = {
-		a : 0,
-		b : 0,
-		c : 0,
-		d : 0
+		ru : 0,
+		rd : 0,
+		ld : 0,
+		lu : 0
 	};
 	
+	/* count all values user checked */
 	for (i=0; i<cityData.length; i++){
-		$.each(cityData[i], function(key, val) {
-			if (key == diagram.a) diagramCounter.a+= val;
-			else if (key == diagram.b) diagramCounter.b+= val; 
-			else if (key == diagram.c) diagramCounter.c+= val; 
-			else if (key == diagram.d) diagramCounter.d+= val;
-		});
+		if (cityData[i].type == places_ToShow){
+			
+			for (k=1; k<cityData[i].sums.length; k++){
+				if (cityData[i].sums[k].year == year_ToShow){
+					$.each(cityData[i].sums[k], function(key, val) {
+						switch (key){
+						case diagram.ru:
+							diagramCounter.ru+= val;
+							break;
+						case diagram.rd:
+							diagramCounter.rd+= val;
+							break;
+						case diagram.ld:
+							diagramCounter.ld+= val;
+							break;
+						case diagram.lu:
+							diagramCounter.lu+= val;
+							break;
+						}
+					});
+				}
+			}
+		}
 	}
 	
-	var circleAttributes = diagramContainer.append("rect")	//1- ORANGE
+	/* normalization */
+	var max= Math.max(diagramCounter.ru, diagramCounter.rd, diagramCounter.ld, diagramCounter.lu);
+	$.each(diagramCounter, function(key, val) {
+		switch (key){
+		case 'ru':
+			diagramCounter.ru= (val/max)*(diagramMax/2);
+			break;
+		case 'rd':
+			diagramCounter.rd= (val/max)*(diagramMax/2);
+			break;
+		case 'ld':
+			diagramCounter.ld= (val/max)*(diagramMax/2);
+			break;
+		case 'lu':
+			diagramCounter.lu= (val/max)*(diagramMax/2);
+			break;
+		}
+	});
+	
+	var rec_ru = diagramContainer.append("rect")	//1- ORANGE
 			.attr("x", centerPos)
-			.attr("y", centerPos-diagramCounter.a)
-			.attr("width", diagramCounter.a)
-			.attr("height", diagramCounter.a)
+			.attr("y", centerPos-diagramCounter.ru)
+			.attr("width", diagramCounter.ru)
+			.attr("height", diagramCounter.ru)
 			.style("fill", ORANGE);
 		
-		var circleAttributes = diagramContainer.append("rect")	//2- GRAY
+	var rec_rd = diagramContainer.append("rect")	//2- GRAY
 			.attr("x", centerPos)
 			.attr("y", centerPos)
-			.attr("width", diagramCounter.b)
-			.attr("height", diagramCounter.b)
+			.attr("width", diagramCounter.rd)
+			.attr("height", diagramCounter.rd)
 			.style("fill", GRAY);
 
-		var circleAttributes = diagramContainer.append("rect")	//3- GREEN
-			.attr("x", centerPos-diagramCounter.c)
+	var rec_ld = diagramContainer.append("rect")	//3- GREEN
+			.attr("x", centerPos-diagramCounter.ld)
 			.attr("y", centerPos)
-			.attr("width", diagramCounter.c)
-			.attr("height", diagramCounter.c)
+			.attr("width", diagramCounter.ld)
+			.attr("height", diagramCounter.ld)
 			.style("fill", GREEN);
 
-		var circleAttributes = diagramContainer.append("rect")	//4- BLUE
-			.attr("x", centerPos-diagramCounter.d)
-			.attr("y", centerPos-diagramCounter.d)
-			.attr("width", diagramCounter.d)
-			.attr("height", diagramCounter.d)
+	var rec_lu = diagramContainer.append("rect")	//4- BLUE
+			.attr("x", centerPos-diagramCounter.lu)
+			.attr("y", centerPos-diagramCounter.lu)
+			.attr("width", diagramCounter.lu)
+			.attr("height", diagramCounter.lu)
 			.style("fill", BLUE);
 }
 
@@ -357,9 +396,8 @@ function rangeSlider_Handler(){
 	//var range = document.mapDataSettingsForm.year;
 	$("#year").change(function() {
 		year_ToShow = this.valueAsNumber;
-		//console.log(year_ToShow);
-		
 		putCities();
+		createDiagram();
 	});
 }
 
@@ -367,22 +405,33 @@ function radioButtons_Handler(){
 	var rad = document.mapDataSettingsForm.mapData;
 	var prev = null;
 	
-	// Show data right after the page is ready
-	putCities();
-	
 	for(var i = 0; i < rad.length; i++) {
 	    rad[i].onclick = function() {
 	        if(this !== prev) {
 	            prev = this;
-	            //show_data_on_map( parseInt(this.value) );
 	            places_ToShow = this.value;
-	            
 	            putCities();
+	            createDiagram();
 	        }
 	    };
 	}
+}
+function putCities(){
+	// Remove all layers that optional added before
+	map.removeLayer(assetLayerGroup_big);
+	map.removeLayer(assetLayerGroup_middle);
+	map.removeLayer(assetLayerGroup_small);
 	
-	function show_data_on_map(size){
-		console.log("show cities in size: "+size);
+	// Set Layer like user checked
+	switch (parseInt(places_ToShow)){
+	case 0:
+		assetLayerGroup_big.addTo(map);
+		break;
+	case 1:
+		assetLayerGroup_middle.addTo(map);
+		break;
+	case 2:
+		assetLayerGroup_small.addTo(map);
+		break;
 	}
 }

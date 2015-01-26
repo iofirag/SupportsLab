@@ -67,9 +67,9 @@
 
 
 /******************** Add Map ****************************************************************/
-	// Just israel
-	/* L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#4';
-	map = L.mapbox.map('map', 'erez.kpm09np5').setView([31.5, 36], 8); */
+	// Us
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#8';
+	map = L.mapbox.map('map', 'erez.l1l22p98').setView([31.5, 36], 8);
 	
 	// General - (hebrew+arabic)
 	/*L.mapbox.accessToken = 'pk.eyJ1IjoiaW9maXJhZyIsImEiOiJ6bFRjUlJ3In0.wnfOTbaAq0r1bsia3puGRg';
@@ -96,25 +96,32 @@
 
 
 
+/********** Control on Map-Zoom Events *************/
+	map.on('zoomend', function(e) {
+	    console.log("zoomend"+" "+map.getZoom());
+	});
+
+
+
 
 var prevW = -1, prevH = -1;
 
 $(window).resize(function() {
-	    var widthChanged = false, heightChanged = false;
-	    if($(window).width() != prevW) {
-	        widthChanged  = true;
-	        //$("#map").css("height", prevW + 'px');
-	    }
-	    if($(window).height() != prevH) {
-	        heightChanged = true;
-	        //$("#map").css("height", $(document).height() + 'px');
-	    }
-	
-	    // your stuff ...
-	    
-	    prevW = $(window).width();
-	    prevH = $(window).height();
-	});
+    var widthChanged = false, heightChanged = false;
+    if($(window).width() != prevW) {
+        widthChanged  = true;
+        //$("#map").css("height", prevW + 'px');
+    }
+    if($(window).height() != prevH) {
+        heightChanged = true;
+        //$("#map").css("height", $(document).height() + 'px');
+    }
+
+    // your stuff ...
+    
+    prevW = $(window).width();
+    prevH = $(window).height();
+});
 	
 $(document).ready(function() {
 	//initiate var
@@ -163,3 +170,6 @@ $(document).ready(function() {
 			    anotherCustomProperty: 'More custom data to this marker!'
 			});
 			myMarker.addTo(map);
+			
+
+assetLayerGroup.clearLayers();

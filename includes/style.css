@@ -36,12 +36,12 @@ body {
 }
 
 #diagram {
-	top: 50%;
-	right: -6%;
+	top: 5%;
+	/*//right: -6%;*/
 	/* width: 300px; */
 	/* height: 300px; */
 	/* z-index: 500; */
-	position: absolute;
+	/*position: absolute;*/
 }
 
 .clear {
