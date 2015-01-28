@@ -173,3 +173,14 @@ $(document).ready(function() {
 			
 
 assetLayerGroup.clearLayers();
+
+
+
+/*switch (city_toShow.type){
+		case 0:	dist/=500000000;
+			break;
+		case 1: dist/=50000000;
+			break;
+		case 2: dist/=10000000;
+			break;
+		}*/
