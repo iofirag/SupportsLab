@@ -17,14 +17,32 @@ body {
 
 #map { 
 	position: relative;
-	width: 80%;
+	width: 75%;
 	float: left;
+}
+
+#mapPage{
+	background-color: #fef6ea;
+}
+
+#mapData{
+	width: 2%;
 }
 .settings{
 	float:right;
 }
 #settings{
 
+	border-style: solid;
+	border-color: #b2aba1;
+	border-left-width: 2px;
+	background-color: #fef6ea;
+
+
+}
+
+#selectable{
+	margin: 0 auto;
 }
 #diagramTitle {
 	top: 50%;
