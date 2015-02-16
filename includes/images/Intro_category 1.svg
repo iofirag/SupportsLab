@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="227px"
+	 height="227px" viewBox="0 0 227 227" enable-background="new 0 0 227 227" xml:space="preserve">
+<g id="background">
+</g>
+<g id="maps">
+</g>
+<g id="Cubes">
+</g>
+<g id="Icons">
+</g>
+<g id="Text">
+</g>
+<g id="layer_3">
+	<g>
+		<rect x="0.343" y="0.373" fill-rule="evenodd" clip-rule="evenodd" fill="#60DB98" width="226.656" height="226.623"/>
+		<g opacity="0.2">
+			<path d="M221.999,5v217H5.001V5H221.999 M226.999,0H0.001v227h226.997V0L226.999,0z"/>
+		</g>
+		<g>
+			<g>
+				<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+					108.881,117.318 113.589,108.697 117.958,116.062 				"/>
+				<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+					113.176,124.778 106.483,113.152 91.696,140.104 104.767,140.104 				"/>
+				<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+					113.043,125.02 122.764,107.304 142.811,140.104 122.896,140.104 121.999,140.104 104.767,140.104 				"/>
+				
+					<line fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="113.176" y1="124.778" x2="104.767" y2="140.104"/>
+				<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+					115.958,120.093 119.699,122.638 123.336,120.77 126.723,122.638 130.207,120.093 				"/>
+				<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+					101.465,122.401 104.196,124.092 106.854,122.852 109.328,124.092 111.873,122.401 				"/>
+			</g>
+			<path fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M143.083,118.101
+				c0-14.199-11.511-25.711-25.712-25.711c-14.2,0-25.711,11.512-25.711,25.711"/>
+			<path fill="#60DB98" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M139.445,130.21c0.039-0.246,0.064-0.495,0.064-0.753c0-2.636-2.137-4.772-4.772-4.772c-2.231,0-4.099,1.532-4.622,3.6
+				c-1.232,0.476-2.109,1.664-2.109,3.064c0,1.817,1.473,3.291,3.292,3.291c0.628,0,1.206-0.19,1.705-0.498v5.998h2.666v-4.585
+				c0.496,0.306,1.078,0.485,1.705,0.485c1.818,0,3.291-1.473,3.291-3.291C140.665,131.721,140.183,130.814,139.445,130.21z"/>
+		</g>
+	</g>
+</g>
+<g id="_x3C_Opacity_Mask_x3E_">
+</g>
+<g id="Isolation_Mode">
+</g>
+</svg>

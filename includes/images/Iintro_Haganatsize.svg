@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="123px"
+	 height="123px" viewBox="0 0 123 123" enable-background="new 0 0 123 123" xml:space="preserve">
+<g id="background">
+</g>
+<g id="maps">
+</g>
+<g id="Cubes">
+	<rect fill="#60DB98" width="123" height="123"/>
+	<g opacity="0.2">
+		<g>
+			<path d="M118,5v113H5V5H118 M123,0H0v123h123V0L123,0z"/>
+		</g>
+	</g>
+</g>
+<g id="Icons">
+	<g>
+		<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			53.019,62.258 57.78,53.586 62.198,60.994 		"/>
+		<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			57.361,69.764 50.595,58.068 35.642,85.182 48.858,85.182 		"/>
+		<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			57.229,70.006 67.058,52.184 87.329,85.182 67.19,85.182 66.283,85.182 48.858,85.182 		"/>
+		
+			<line fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="57.361" y1="69.764" x2="48.858" y2="85.182"/>
+		<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			60.176,65.049 63.958,67.609 67.636,65.73 71.061,67.609 74.584,65.049 		"/>
+		<polyline fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			45.52,67.371 48.281,69.072 50.97,67.824 53.471,69.072 56.044,67.371 		"/>
+	</g>
+	<path fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M87.604,63.045
+		c0-14.283-11.641-25.863-26-25.863s-26,11.58-26,25.863"/>
+</g>
+<g id="Text">
+</g>
+<g id="layer_3">
+	<path fill="#60DB98" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M83.973,75.119
+		c0.039-0.245,0.064-0.494,0.064-0.751c0-2.632-2.133-4.765-4.764-4.765c-2.228,0-4.092,1.529-4.614,3.594
+		c-1.229,0.475-2.105,1.661-2.105,3.059c0,1.814,1.471,3.285,3.286,3.285c0.627,0,1.204-0.189,1.702-0.497v5.987h2.661v-4.576
+		c0.495,0.305,1.076,0.484,1.702,0.484c1.814,0,3.285-1.471,3.285-3.285C85.19,76.627,84.71,75.723,83.973,75.119z"/>
+</g>
+<g id="_x3C_Opacity_Mask_x3E_">
+</g>
+<g id="Isolation_Mode">
+</g>
+</svg>

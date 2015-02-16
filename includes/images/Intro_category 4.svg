@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="111px"
+	 height="111px" viewBox="0 0 111 111" enable-background="new 0 0 111 111" xml:space="preserve">
+<g id="background">
+</g>
+<g id="maps">
+</g>
+<g id="Cubes">
+</g>
+<g id="Icons">
+</g>
+<g id="Text">
+	<g>
+		<rect fill-rule="evenodd" clip-rule="evenodd" fill="#F06A5C" width="111" height="111"/>
+		<g>
+			<g>
+				<path fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M82.427,68.499
+					c0,3.686-3.016,6.701-6.701,6.701H34.583c-3.685,0-6.701-3.016-6.701-6.701V43.354c0-3.686,3.016-6.701,6.701-6.701h41.143
+					c3.685,0,6.701,3.016,6.701,6.701V68.499z"/>
+			</g>
+			<polygon fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+				64.149,52.916 58.167,52.916 58.167,46.932 52.144,46.932 52.144,52.916 46.16,52.916 46.16,58.939 52.144,58.939 52.144,64.923 
+				58.167,64.923 58.167,58.939 64.149,58.939 			"/>
+			<g>
+				<path fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M65.557,36.653
+					v-8.079c0-0.736-0.603-1.34-1.34-1.34H46.093c-0.737,0-1.34,0.604-1.34,1.34v8.079"/>
+			</g>
+			
+				<line fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="3.3505,3.3505" x1="73.991" y1="37.215" x2="73.991" y2="75.199"/>
+			
+				<line fill="none" stroke="#33312E" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="3.3505,3.3505" x1="36.32" y1="37.215" x2="36.32" y2="75.199"/>
+		</g>
+		<g opacity="0.2">
+			<path d="M106,4.656v101H5v-101H106 M111-0.344H0v111h111V-0.344L111-0.344z"/>
+		</g>
+	</g>
+</g>
+<g id="layer_3">
+</g>
+<g id="_x3C_Opacity_Mask_x3E_">
+</g>
+<g id="Isolation_Mode">
+</g>
+</svg>

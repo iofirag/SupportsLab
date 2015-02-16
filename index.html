@@ -1,31 +1,221 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<!-- css -->
-		<link rel="stylesheet" type="text/css" href="includes/style.css" />
-
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<meta charset="UTF-8">
+		
 		<!-- Import jQuery -->
-		<script src="includes/jquery-1.10.2.min.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-		<!-- Import D3.js -->
-		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="includes/js/index.js"></script>
 
-		<!-- Import topo-json Support -->
-		<script src="http://d3js.org/topojson.v1.min.js"></script>
+		<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>	
+		<link rel="stylesheet" href="css/tohnit-haluka.css"> -->
+		<link rel="stylesheet" href="includes/css/index.css">
+ 		<title>Tohnit HaHaluka</title> 
+ 		<script>
+		function nextpage(){
+			// var diagram = {
+				// ru : selected[1],
+				// rd : selected[2],
+				// ld : selected[3],
+				// lu : selected[0]
+			// };			
+			//localStorage.setItem('mushon', JSON.stringify(diagram));
+			var link  = "map.html"+"?"+"ru="+selected[1]   +"&rd="+selected[2]   +"&ld="+selected[3]   +"&lu="+selected[0];
+			window.location.href = link;
+			console.log(link);
+		}
+	</script>
+	</head> 
+	
+	<body> 
+		<div id="wrapper"> 
+			<section id="mainPage" data-role="page" class="mainPageBg">
+				<section class="innerPlace">
+					<div id="mapArea">
+						<h3 class="mapHeadText">בחרו קטגוריות להשוואה:</h3>
+						<div id="introMap">
+							<section id="place0" class="selectedCategory"><img id="img0"></img></section>
+							<section id="place1" class="selectedCategory"><img id="img1"></img></section>
+							<section id="place2" class="selectedCategory"><img id="img3"></img></section>
+							<section id="place3" class="selectedCategory"><img id="img2"></img></section>			
+						</div>
+						<section id="mapBtn">
+							<a href="#" onclick="nextpage();" class="button go-to-map-button">to map</a>
+						</section>
+					</div>
+					<aside id="rightSide">
+						<a href="index.html" rel="external" data-ajax="false"> <header id="logo"></header> </a>  
+						<section id="categorySection">
+							<h2 class="headText">תאטראות או בתי כנסת? רופאים או מורים? חקלאות או בינוי?</h2>
+							<p class="expText">כלכליסט ושנקר מגישים: כך נראה סדר העדיפויות של הממשלה, לפי כמות התקציבים שהיא מחלקת לרשויות המקומיות השונות. בדקו כמה הממשלה משקיעה בכם מכספי המסים שלכם והשוו לרשויות מקומיות אחרות, מ-2008 ועד היום. </p>
+							<p class="srcText">מקור: מערכת התמיכות של החשב הכללי במשרד האוצר</p>
+									
+							<section id="iconsSection" >
 
-		<!-- Import world-topo-json -->
-		<script src="includes/datamaps4.world.min.js"></script>
+								<div id="Briut" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_BriutIcon.svg">
+									<h4 class="iconText">בריאות</h4>
+								</div>
 
-		<!-- Mouse handler -->
-		<script src="includes/mouse.handler.js"></script>
+								<div id="Binuy" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_ShikunIcon.svg">
+									<h4 class="iconText">בינוי ושיכון</h4>
+								</div>
 
-		<!-- Map handler -->
-		<!-- <script type="text/javascript" src="includes/map.js"></script> -->
+								<div id="Sviva" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_HaganatHasvivaIcon.svg">
+									<h4 class="iconText">הגנת הסביבה</h4>
+								</div>
 
-		<section id="zoom_map"></section>
-		<section id="diagram"></section>
+								<div id="Revaha" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_RevahaIcon.svg">
+									<h4 class="iconText">רווחה</h4>
+								</div>
+
+								<div id="Bitahon" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_BitahonIcon.svg">
+									<h4 class="iconText">בטחון</h4>
+								</div>
+
+								<div id="Trabut" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_TarbutIcon.svg">
+									<h4 class="iconText">תרבות</h4>
+								</div>
+										
+								<div id="Transport" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_TahburaIcon.svg">
+									<h4 class="iconText">תחבורה</h4>
+								</div>
+
+								<div id="Pnim" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_PnimIcon.svg">
+									<h4 class="iconText">פנים</h4>
+								</div>
+
+								<div id="Dat" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_DatIcon.svg">
+									<h4 class="iconText">דת</h4>
+								</div>
+
+								<div id="Haklaut" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_HaklautIcon.svg">
+									<h4 class="iconText">חקלאות</h4>
+								</div>
+
+								<div id="Klita" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_KlitatAliyahIcon.svg">
+									<h4 class="iconText">קליטת עליה</h4>
+								</div>
+
+								<div id="Education" class="iconElement" onclick="categoryClick(this)">
+									<img src="includes/images/Intro_HinuhIcon.svg">
+									<h4 class="iconText">חינוך</h4>
+								</div>
+							</section>
+						</section>
+					</aside>
+					<footer>
+						<div class="footer">
+      						<div class="credits"><span>פרויקט סמסטריאלי בויזואליזציית מידע.</span> עיצוב: ארז רזניקוב / זוהר סלאח. תכנות: רובי ליאני / אופיר אגאי. תקשורת חזותית בשיתוף הנדסת תכנה. שנקר. 2015.&nbsp;</div>
+    					</div>
+					</footer>
+							
+				</section>	
+			</section>
+
+			<!--
+			<section id="mapPage" data-role="page">
+				<nav id="mapTop">
+					<a href="#mainPage">
+						<header id="mapLogo"></header>
+					</a>
+					<section id="categoriesLinks">
+						<div class="toggle-item" data-ix="fade-in-1" >
+					    	<div class="category-filter-idle briut-idle" id="briutBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">בריאות</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-2">
+					        <div class="category-filter-idle shikun-idle" id="shikunBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">ב. ושיכון</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-3">
+					        <div class="category-filter-idle haganat-sviva-idle" id="svivaBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">ה. סביבה</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-4">
+					        <div class="category-filter-idle revaha-idle" id="revahaBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">רווחה</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-5">
+					       	<div class="category-filter-idle bitahon-idle" id="bitahonBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">בטחון</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-6">
+					        <div class="category-filter-idle tarbut-idle" id="tarbutBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">תרבות</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-7">
+					    	<div class="category-filter-idle tahbura-idle" id="tahburaBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">תחבורה</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-8">
+					    	<div class="category-filter-idle pnim-idle" id="pnimBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">פנים</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-9">
+					        <div class="category-filter-idle dat-idle" id="datBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">דת</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-10">
+					        <div class="category-filter-idle haklaut-idle" id="haklautBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">חקלאות</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-11">
+					        <div class="category-filter-idle klitat-aliya-idle" id="klitaBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">ק. עליה</div>
+					    </div>
+					    <div class="toggle-item" data-ix="fade-in-12">
+					        <div class="category-filter-idle hinuh-idle" id="hinuhBtn" onclick="toggleBtn(this)"></div>
+					        <div class="category-toggle-name">חינוך</div>
+					    </div>
+					</section>
+				</nav>
+			
+				
+				<section id="mapContent">
+					<section id="map"></section>
+					<section id="settings" data-role="content">
+						<form name="mapDataSettingsForm" method="post" action="demoform.asp">
+							<label for="year">שנה:
+								<input class="slider" type="range" name="year" id="year" value="2014" min="2008" max="2014">
+							</label>
+
+							<label for="placesToShow">מידע לתצוגה:</label>
+							<label for="mapData">ערים
+								<input type="radio" name="mapData" value="0" checked>
+							</label>
+							<label for="mapData">מועצות אזוריות
+								<input type="radio" name="mapData" value="1" >
+							</label>
+							<label for="mapData">מועצות מקומיות
+								<input type="radio" name="mapData" value="2" >
+							</label>
+							
+							<label for="diagramTitle">סה"כ עבור כל השנים:</label>
+							<section id="diagram"></section>
+							
+							<input type="button" name="clearMapData" value="ביטול בחירה" onclick="clearButton_Handler();" >
+						</form>
+					</section>
+				</section> 
+				<div class="clear"></div>
+				
+			</section>-->
+		</div> 
 	</body>
+	
 </html>
