@@ -57,7 +57,7 @@ html, body {
 	height: 100vh;
 	float: left;
 	display: block;
-	/*position: fixed;*/
+	position: fixed;
 	background-color: #fff4e7;
 	z-index: 1;
 }
