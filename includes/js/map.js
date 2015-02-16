@@ -84,8 +84,13 @@ $(document).ready(function() {
 function selectColors(){
 	ORANGE = getColorFromCategory(diagram.ru);
 	GRAY =  getColorFromCategory(diagram.rd);
+<<<<<<< HEAD
 	GREEN =  getColorFromCategory(diagram.ld);
 	BLUE =  getColorFromCategory(diagram.lu);
+=======
+	GREEN =  getColorFromCategory(diagram.lu);
+	BLUE =  getColorFromCategory(diagram.ld);
+>>>>>>> FETCH_HEAD
 }
 
 function getColorFromCategory(category){
