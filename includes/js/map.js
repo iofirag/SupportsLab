@@ -60,6 +60,8 @@ $(document).ready(function() {
 
 	/* load database & build 3 data layers */
 	readFromDatabase();
+
+	selectColors();
 	
 	/* Create diagram */
 	createDiagram();
@@ -79,12 +81,76 @@ $(document).ready(function() {
 });
 
 			
+function selectColors(){
+	ORANGE = getColorFromCategory(diagram.ru);
+	GRAY =  getColorFromCategory(diagram.rd);
+	GREEN =  getColorFromCategory(diagram.lu);
+	BLUE =  getColorFromCategory(diagram.ld);
+}
+
+function getColorFromCategory(category){
+	switch(category){
+			case "Briut": 
+				return "#ef695b";
+
+			case "Binuy": 
+					
+				return "#e7d14c";
+			
+
+			case "Sviva": 
+				return "#60db97";
+
+		
+
+			case "Revaha": 
+				return "#37b099";
+
+			
+
+			case "Bitahon": 
+				return "#5291c6";
+
+			
+
+			case "Trabut": 
+				return "#c67397";
+			
+
+			case "Transport": 
+				return "#ffbc47";
+			
+
+			case "Pnim": 
+				return "#fbbe67";
+			
+
+			case "Dat": 
+				return "#9bd0bb";
+		
+
+			case "Haklaut": 
+				return "#aed65e";
+			break;
+
+			case "Klita": 
+				return "#40b4d1";
+			break;
+
+			case "Education": 
+				return "#6fb971";
+
+			break;
+	}
+}
+
 function createMap(){
 	/******************** Adjust Map tag size ***************************/
-	$("#map").css("height", $(window).height()-20 + 'px');
+	$("#map").css("height", $(window).height()-150 + 'px');
+	$("#settings").css("height", $(window).height()-200 + 'px');
 	
 	$(window).resize(function() {
-		$("#map").css("height", $(window).height()-20 + 'px');
+		$("#map").css("height", $(window).height()-150 + 'px');
 		map.panTo(new L.LatLng(31.5, 36));
 	});
 	
@@ -93,8 +159,8 @@ function createMap(){
 	
 	/******************** Add Map ****************************************************************/
 	// Us
-	L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#8';
-	map = L.mapbox.map('map', 'erez.l1l22p98').setView([31.5, 36], 8);
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZXJleiIsImEiOiJBcERuZV9rIn0.osZ0ZA6WBNN9-urjHfkccQ#9/31.8985/35.1714';
+	map = L.mapbox.map('map', 'erez.l7l5bmcf').setView([31.5, 36], 8);
 	
 	
 	// initiate data layer-group
@@ -138,8 +204,8 @@ function readFromDatabase(){
     /* Create an Layer-Group (use for fast remove all of them) */
 	function createCityLayers(city) {
 		var circle = L.circle([city.latitude, city.longitude], 700,  {
-				    color: 'green',
-				    fillColor: '#f03',
+				    color: '#403d3a',
+				    fillColor: '#B3aca2',
 				    fillOpacity: 0.5
 				    //className: cityData[i].fillkey
 				});

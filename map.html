@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Fee Money</title>
+		<title>תכנית החלוקה</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Import jQuery -->
@@ -126,20 +126,23 @@
 								<input class="slider" type="range" name="year" id="year" value="2014" min="2008" max="2014">
 							</label>
 
-							<label for="placesToShow">מידע לתצוגה:</label>
-							<label for="mapData">ערים
-								<input type="radio" name="mapData" value="0" checked>
-							</label>
-							<label for="mapData">מועצות אזוריות
-								<input type="radio" name="mapData" value="1" >
-							</label>
-							<label for="mapData">מועצות מקומיות
-								<input type="radio" name="mapData" value="2" >
-							</label>
-
 							<label for="diagramTitle">סה"כ עבור כל השנים:</label>
 							<section id="diagram"></section>
 
+							<label for="placesToShow">מידע לתצוגה:</label>
+							<fieldset data-role="controlgroup" data-type="horizontal" >
+							<label for="mapData">ערים
+								<input type="radio" name="mapData" value="0" checked>
+							</label>
+							<label for="mapData">מ.  אזוריות 
+								<input type="radio" name="mapData" value="1" >
+							</label>
+							<label for="mapData">מ.  מקומיות 
+								<input type="radio" name="mapData" value="2" >
+							</label>
+							</fieldset>
+
+						
 							<input type="button" name="clearMapData" value="ביטול בחירה" onclick="clearButton_Handler();" >
 						</form>
 					</section>
