@@ -43,6 +43,7 @@ body {
 
 #selectable{
 	margin: 0 auto;
+	text-align: center;
 }
 #diagramTitle {
 	top: 50%;
